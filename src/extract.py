@@ -17,7 +17,9 @@ Rules:
 - deadline_text is the exact phrase used ("by Friday"); deadline is that phrase resolved to a date using the meeting date. Use null for both if no deadline is given.
 - "next <weekday>" means the nearest upcoming <weekday> after the meeting date.
 - confidence reflects how clearly the transcript states the task, owner and deadline.
-- If there are no action items, return []."""
+- If there are no action items, return [].
+- "We need to <task>" is an action item even with no owner; set owner to null (the speaker is not the owner).
+- If the meeting falls on the named weekday, "by <weekday>" means the same day."""
 
 class DailyQuota(Exception):
     pass
