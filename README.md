@@ -29,15 +29,14 @@ python src/evaluate.py
 streamlit run app.py
 ```
 
-## Results (30 synthetic meetings, 91 action items)
-- Task detection: precision 1.00, recall 0.99, F1 0.99
-- Full match (task + owner + deadline): F1 0.95
-- Owner accuracy 90/91, deadline accuracy 88/91
+## Results (N synthetic meetings, 152 action items)
+- Task detection: precision 1.00, recall 0.99, F1 1.00
+- Full match (task + owner + deadline): precision 0.96, recall 0.95, F1 0.96
+- Owner accuracy 151/152, deadline accuracy 147/152
 
 ## Limitations
 - Data is synthetic and templated, so scores are optimistic; real meetings are messier.
-- Small sample (30 meetings, 91 items): one error moves the numbers noticeably.
-- Of 5 errors, 3 are date-label ambiguities ("next Monday", or "by Friday" when the meeting is held on a Friday), where the model's reading is defensible. 2 are genuine: one missed "We need to..." item with no owner, and one owner wrongly inferred from "We need to...".
+- Of 7 errors, 5 are deadlines off by exactly one week ("next Monday", or "by Friday" when the meeting is held on a Friday), where the model's reading is defensible. 2 are genuine: one missed "We need to..." item with no owner, and one owner wrongly inferred from "We need to...".
 - The prompt was updated partway through, so the first 14 meetings used an earlier prompt.
 - LLM confidence is overconfident (often 1.0). Lower scores come from the validation rules (missing owner, unresolved date), so treat confidence as a ranking signal, not a probability.
 - Free-tier API limits meant the dataset was extracted over several runs.
